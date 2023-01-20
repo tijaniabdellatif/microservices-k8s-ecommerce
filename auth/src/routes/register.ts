@@ -1,5 +1,5 @@
 import express,{Request,Response} from 'express';
-import { body } from 'express-validator';
+import { body,validationResult } from 'express-validator';
 const router = express.Router();
 
 router.post('/api/users/register',[
@@ -16,9 +16,17 @@ router.post('/api/users/register',[
    
 
 ],(req: Request,res: Response) => {
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
 
+          return res.status(400).send(errors.array());
+    }
+    
     const { email , pasword} = req.body;
 
+    console.log('creating user');
+
+    res.send({});
 
 
 });
