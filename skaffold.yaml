@@ -10,7 +10,7 @@ build:
   googleCloudBuild:
     projectId: listcoins
   artifacts:
-  - image: us.gcr.io/listcoins/auth
+  - image: abdellatiftijani/auth
     context: auth
     docker:
       dockerfile: Dockerfile
