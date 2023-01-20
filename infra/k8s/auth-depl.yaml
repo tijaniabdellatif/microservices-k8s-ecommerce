@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: abdellatiftijani/auth
+        image: us.gcr.io/listcoins/auth
 ---
 apiVersion: v1
 kind: Service

@@ -5,10 +5,12 @@ deploy:
     manifests:
     - ./infra/k8s/*
 build:
-  local:
-    push: false
+  #  local:
+  #   push: false
+  googleCloudBuild:
+    projectId: listcoins
   artifacts:
-  - image: abdellatiftijani/auth
+  - image: us.gcr.io/listcoins/auth
     context: auth
     docker:
       dockerfile: Dockerfile
