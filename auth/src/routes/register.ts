@@ -2,8 +2,8 @@ import express,{Request,Response} from 'express';
 import { body,validationResult,check } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from "jsonwebtoken";
-
-
+import { RequestValidationError } from '../errors/RequestValidation';
+import { DataBaseConnectionError } from '../errors/DatabaseError';
 const gravatar = require('gravatar');
 
 
@@ -27,14 +27,16 @@ router.post('/api/users/register',[
      const errors = validationResult(req);
 
     if(!errors.isEmpty()){
-         throw new Error('Invalid email or password');
+
+         //handling the error 
+        throw new RequestValidationError(errors.array());
     }
    
     const {name,email,password} = req.body;
     
 
     console.log('Creating a user');
-    throw new Error('Cannot connect to db');
+    throw new DataBaseConnectionError();
     res.send({})
 
 
