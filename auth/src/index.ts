@@ -7,12 +7,10 @@ import { userRegister } from './routes/register';
 import { errorHandler } from './middlewares/ErrorHandler';
 const app = express();
 app.use(json());
-
 app.use(currentUserRouter);
 app.use(userLogin);
-app.use(userRegister);
 app.use(userLogOut);
-
+app.use(userRegister);
 app.use(errorHandler);
 
 

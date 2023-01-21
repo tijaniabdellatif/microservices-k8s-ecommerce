@@ -22,7 +22,7 @@ router.post('/api/users/register',[
 
    
 
-],async (req: Request,res: Response) => {
+], (req: Request,res: Response) => {
    
      const errors = validationResult(req);
 
@@ -31,42 +31,11 @@ router.post('/api/users/register',[
     }
    
     const {name,email,password} = req.body;
+    
 
-    try{
-
-        const user : {name:string,email:string,password:string} = {
-
-              name:'tijani abdellatif',
-              email:'a.tijani@gmail.com',
-              password:'qazwsxedc'
-
-        }
-
-        const avatar = gravatar.url(email,{
-
-            s: '200',
-            r: 'pg',
-            d: 'mm'
-        });
-
-
-        const salt = await bcrypt.genSalt(10);
-        let newpass = await bcrypt.hash(password,salt);
-
-        /* Implemeting json webtokenn */        
-        res.status(200).json({
-
-             message: "Success",
-             password: newpass
-        })
-
-    }catch(error){
-
-        throw new Error('Error connecting to the database');
-
-    }
-
-
+    console.log('Creating a user');
+    throw new Error('Cannot connect to db');
+    res.send({})
 
 
 });
