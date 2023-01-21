@@ -1,6 +1,8 @@
 import express,{Request,Response} from 'express';
 import { body,validationResult,check } from 'express-validator';
 import bcrypt from 'bcryptjs';
+import jsonwebtoken from "jsonwebtoken";
+
 
 const gravatar = require('gravatar');
 
@@ -25,9 +27,7 @@ router.post('/api/users/register',[
      const errors = validationResult(req);
 
     if(!errors.isEmpty()){
-
-         return res.status(400).json({errors : errors.array()});
-
+         throw new Error('Invalid email or password');
     }
    
     const {name,email,password} = req.body;
@@ -53,9 +53,7 @@ router.post('/api/users/register',[
         const salt = await bcrypt.genSalt(10);
         let newpass = await bcrypt.hash(password,salt);
 
-        /* Implemeting json webtokenn */
-        
-
+        /* Implemeting json webtokenn */        
         res.status(200).json({
 
              message: "Success",
@@ -64,8 +62,7 @@ router.post('/api/users/register',[
 
     }catch(error){
 
-          console.error(error);
-          res.status(500).json({ message : "Server is not responding"});
+        throw new Error('Error connecting to the database');
 
     }
 
