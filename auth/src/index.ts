@@ -4,7 +4,6 @@ import { currentUserRouter } from './routes/current';
 import { userLogOut } from './routes/logout';
 import { userLogin } from './routes/login';
 import { userRegister } from './routes/register';
-
 const app = express();
 app.use(json());
 

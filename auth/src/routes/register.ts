@@ -1,32 +1,75 @@
 import express,{Request,Response} from 'express';
-import { body,validationResult } from 'express-validator';
+import { body,validationResult,check } from 'express-validator';
+import bcrypt from 'bcryptjs';
+
+const gravatar = require('gravatar');
+
+
 const router = express.Router();
 
 router.post('/api/users/register',[
 
-    body('email')
-    .isEmail()
-    .withMessage('Email must be valid'),
+   check('name','Name is required')
+    .not().isEmpty(),
 
-    body('password')
-    .trim()
-    .isLength({min:5,max:20})
-    .withMessage('Password must be validated')
+    check('email','Please include a valid email')
+     .isEmail(),
+
+     check('password','Please entre a password 6 or more character')
+     .isLength({min:6,max:30})
 
    
 
-],(req: Request,res: Response) => {
-    const errors = validationResult(req);
+],async (req: Request,res: Response) => {
+   
+     const errors = validationResult(req);
+
     if(!errors.isEmpty()){
 
-          return res.status(400).send(errors.array());
+         return res.status(400).json({errors : errors.array()});
+
     }
-    
-    const { email , pasword} = req.body;
+   
+    const {name,email,password} = req.body;
 
-    console.log('creating user');
+    try{
 
-    res.send({});
+        const user : {name:string,email:string,password:string} = {
+
+              name:'tijani abdellatif',
+              email:'a.tijani@gmail.com',
+              password:'qazwsxedc'
+
+        }
+
+        const avatar = gravatar.url(email,{
+
+            s: '200',
+            r: 'pg',
+            d: 'mm'
+        });
+
+
+        const salt = await bcrypt.genSalt(10);
+        let newpass = await bcrypt.hash(password,salt);
+
+        /* Implemeting json webtokenn */
+        
+
+        res.status(200).json({
+
+             message: "Success",
+             password: newpass
+        })
+
+    }catch(error){
+
+          console.error(error);
+          res.status(500).json({ message : "Server is not responding"});
+
+    }
+
+
 
 
 });
