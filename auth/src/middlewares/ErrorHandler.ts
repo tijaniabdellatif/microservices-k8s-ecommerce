@@ -3,17 +3,13 @@ import { RequestValidationError } from '../errors/RequestValidation';
 import { DataBaseConnectionError } from '../errors/DatabaseError';
 export const errorHandler = (err: Error,req:Request,res:Response,next:NextFunction) =>{
     if(err instanceof RequestValidationError){
-          console.log('handling an error as a request');
+          const formatedErrors = err.errors.map(erno =>{
+                return {message:erno.msg,field:erno.param}
+          })
+         return res.status(400).send({errors:formatedErrors});
     }
 
     if(err instanceof DataBaseConnectionError){
-        console.log('HAndling this error as databse');
+        console.log('Handling this error as databse');
     }
-
-    res.status(400).send({
-            message:err.message
-    });
-     
-      
-
 }

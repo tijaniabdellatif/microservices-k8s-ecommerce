@@ -15,10 +15,15 @@ router.post('/api/users/register',[
     .not().isEmpty(),
 
     check('email','Please include a valid email')
+    .optional({ checkFalsy: true, nullable: true })
      .isEmail(),
 
-     check('password','Please entre a password 6 or more character')
-     .isLength({min:6,max:30})
+     check('password', 'The password must be 5+ chars long and contain a number')
+    .not()
+    .isIn(['password', '123456', 'godthing'])
+    .withMessage('Do not use a common word as the password')
+    .isLength({ min: 5 , max:20})
+    .matches(/\d/)
 
    
 
@@ -28,7 +33,6 @@ router.post('/api/users/register',[
 
     if(!errors.isEmpty()){
 
-         //handling the error 
         throw new RequestValidationError(errors.array());
     }
    
