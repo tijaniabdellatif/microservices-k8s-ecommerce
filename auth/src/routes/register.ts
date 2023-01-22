@@ -27,7 +27,7 @@ router.post('/api/users/register',[
 
    
 
-], (req: Request,res: Response) => {
+], async (req: Request,res: Response) => {
    
      const errors = validationResult(req);
 
