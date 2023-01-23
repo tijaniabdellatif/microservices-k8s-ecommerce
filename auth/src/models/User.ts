@@ -76,15 +76,4 @@ userSchema.statics.build = (attrs: UserInterface) => {
 
 const User = mongoose.model<UserDocumentDecorator, UserDecorator>('User',userSchema);
 
- 
-const user = User.build({
-
-    name:'tijani',
-    email:'abdellatif',
-    password:'flask'
-});
-
-
-
-
 export { User };
