@@ -1,7 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 import {json} from 'body-parser';
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 
 import { currentUserRouter } from './routes/current';
 import { userLogOut } from './routes/logout';
@@ -26,10 +26,10 @@ app.use(errorHandler);
 const start = async () =>{
 
   try{
+    
     await mongoose.connect('mongodb://auth-mongo-srv:27017/auth',{
       family: 4,
     });
-
   console.log('connected to monggodb')
   }catch(error){
 
