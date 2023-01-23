@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 /**
  * Interface UserInterface 
+ * propreties required as creating new User
  * @param email:String
  * @param password:String
  * @param name:String
@@ -15,6 +16,19 @@ interface UserInterface {
     password:string
 
 }
+
+/**
+ * Interface UserDecorator 
+ * Describe propreties of a model User
+ * @param email:String
+ * @param password:String
+ * @param name:String
+ */
+interface UserDecorator  extends mongoose.Model<any>{
+     build(attrs: UserInterface): any;
+    
+}
+
 const userSchema = new mongoose.Schema({
 
     name:{
@@ -37,11 +51,21 @@ const userSchema = new mongoose.Schema({
 
 });
 
-const User = mongoose.model('User',userSchema);
+userSchema.statics.build = (attrs: UserInterface) => {
 
-const buildUser = (attrs: UserInterface) =>{
-    return new User(attrs);
-};
+     return new User(attrs);
+}
+
+const User = mongoose.model<any, UserDecorator>('User',userSchema);
+
+ 
+User.build({
+
+    email:'tijani@gmail.com',
+    password:'abdellatif23',
+    name:'franky'
+
+});
 
 
-export { User , buildUser};
+export { User };
