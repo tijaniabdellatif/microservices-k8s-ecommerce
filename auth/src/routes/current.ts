@@ -1,9 +1,21 @@
-import express from 'express';
+import express,{Response,Request} from 'express';
+import jsonwebtoken from 'jsonwebtoken';
 const router = express.Router();
-router.get('/api/users/current',(req,res) => {
+router.get('/api/users/current',async (req:Request,res:Response) => {
 
-    res.send('Hi wolrd');
+       if(!req.session?.jwt){
+            return res.send({currentUser : null});
+       }
+       try{
+        const payload = jsonwebtoken.verify(req.session.jwt,process.env.jwt!);
+        res.send({currentUser:payload});
+       }catch(error){
 
+          res.send({curentUser:null});
+       }
+      
+
+    
 
 });
 
