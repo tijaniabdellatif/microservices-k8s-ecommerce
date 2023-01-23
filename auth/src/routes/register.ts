@@ -4,11 +4,7 @@ import jsonwebtoken from "jsonwebtoken";
 import { User } from '../models/User';
 import { RequestValidationError } from '../errors/RequestValidation';
 import { BadRequestError } from '../errors/BadRequestError';
-
-
-
 const router = express.Router();
-
 router.post('/api/users/register',[
 
    check('name','Name is required')
@@ -27,8 +23,7 @@ router.post('/api/users/register',[
     .matches(/\d/)
 ], async (req: Request,res: Response) => {
    
-     const errors = validationResult(req);
-
+    const errors = validationResult(req);
     if(!errors.isEmpty()){
         throw new RequestValidationError(errors.array());
     }
