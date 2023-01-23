@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 import jsonwebtoken from "jsonwebtoken";
 import { User } from '../models/User';
 import { RequestValidationError } from '../errors/RequestValidation';
-
+import { BadRequestError } from '../errors/BadRequestError';
 
 
 const router = express.Router();
@@ -38,9 +38,8 @@ router.post('/api/users/register',[
 
       const {email,password,name} = req.body;
       const existingUser = await User.findOne({email});
-      if(existingUser){
-          console.log('email in use');
-          return res.send({});
+      if(existingUser){  
+         throw new BadRequestError('Email in use');
       }
 
       const user = User.build({email,password,name});
