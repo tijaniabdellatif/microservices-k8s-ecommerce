@@ -24,8 +24,26 @@ interface UserInterface {
  * @param password:String
  * @param name:String
  */
-interface UserDecorator  extends mongoose.Model<any>{
-     build(attrs: UserInterface): any;
+interface UserDecorator  extends mongoose.Model<UserDocumentDecorator>{
+     build(attrs: UserInterface): UserDocumentDecorator;
+    
+}
+
+/**
+ * Interface UserDocumentDecorator
+ * Describe propreties that a user Document has
+ * @param email:String
+ * @param password:String
+ * @param name:String
+ */
+
+interface UserDocumentDecorator extends mongoose.Document {
+
+    email:string;
+    name:string;
+    password:string;
+    createdAt:string,
+    updatedAt:string
     
 }
 
@@ -49,16 +67,23 @@ const userSchema = new mongoose.Schema({
         required:true
     }
 
-});
+},{ timestamps: true });
 
 userSchema.statics.build = (attrs: UserInterface) => {
 
      return new User(attrs);
 }
 
-const User = mongoose.model<any, UserDecorator>('User',userSchema);
+const User = mongoose.model<UserDocumentDecorator, UserDecorator>('User',userSchema);
 
  
+const user = User.build({
+
+    name:'tijani',
+    email:'abdellatif',
+    password:'flask'
+});
+
 
 
 
