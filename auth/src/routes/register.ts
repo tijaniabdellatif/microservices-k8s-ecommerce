@@ -2,9 +2,9 @@ import express,{Request,Response} from 'express';
 import { body,validationResult,check } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from "jsonwebtoken";
+import { User } from '../models/User';
 import { RequestValidationError } from '../errors/RequestValidation';
-import { DataBaseConnectionError } from '../errors/DatabaseError';
-const gravatar = require('gravatar');
+
 
 
 const router = express.Router();
@@ -35,15 +35,19 @@ router.post('/api/users/register',[
 
         throw new RequestValidationError(errors.array());
     }
-   
-    const {name,email,password} = req.body;
-    
 
-    console.log('Creating a user');
-    throw new DataBaseConnectionError();
-    res.send({})
+      const {email,password,name} = req.body;
+      const existingUser = await User.findOne({email});
+      if(existingUser){
+          console.log('email in use');
+          return res.send({});
+      }
 
+      const user = User.build({email,password,name});
+      console.log(user);
+      await user.save();
+      res.status(201).send(user);
 
-});
+  });
 
 export { router as userRegister };
