@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { createDecorator } from "typescript";
 import { PasswordHash } from "../services/PasswordHash";
 /**
  * Interface UserInterface 
@@ -66,7 +67,27 @@ const userSchema = new mongoose.Schema({
         required:true
     }
 
-},{ timestamps: true });
+},{ 
+    
+    timestamps: true,
+    toJSON:{
+
+        transform(doc,ret){
+
+               /**
+                * Remove the password in response 
+                * and some other propreties
+                */
+               ret.id = ret._id;
+               delete ret._id;
+               delete ret.password;
+               delete ret.__v;
+               delete ret.createdAt;
+               delete ret.updatedAt;
+
+        }
+        
+}});
 
 
 /**

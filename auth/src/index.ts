@@ -36,7 +36,6 @@ const start = async () =>{
      throw new Error('Json web Token is not defined');
   }
   try{
-    
     await mongoose.connect('mongodb://auth-mongo-srv:27017/auth',{
       family: 4,
     });
