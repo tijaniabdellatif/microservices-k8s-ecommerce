@@ -1,4 +1,20 @@
 import mongoose from "mongoose";
+
+/**
+ * Interface UserInterface 
+ * @param email:String
+ * @param password:String
+ * @param name:String
+ * @return User
+ */
+
+interface UserInterface {
+
+    name:string,
+    email:string,
+    password:string
+
+}
 const userSchema = new mongoose.Schema({
 
     name:{
@@ -22,4 +38,10 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User',userSchema);
-export { User as UserModel };
+
+const buildUser = (attrs: UserInterface) =>{
+    return new User(attrs);
+};
+
+
+export { User , buildUser};
