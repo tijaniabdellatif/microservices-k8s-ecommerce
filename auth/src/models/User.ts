@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import { PasswordHash } from "../services/PasswordHash";
 /**
  * Interface UserInterface 
  * propreties required as creating new User
@@ -26,7 +26,6 @@ interface UserInterface {
  */
 interface UserDecorator  extends mongoose.Model<UserDocumentDecorator>{
      build(attrs: UserInterface): UserDocumentDecorator;
-    
 }
 
 /**
@@ -68,6 +67,25 @@ const userSchema = new mongoose.Schema({
     }
 
 },{ timestamps: true });
+
+
+/**
+ * Pre saved Hook
+ * Save hashed password
+ * @param action event
+ * @param anonymous function 
+ */
+userSchema.pre('save',async function(done){
+
+    if(this.isModified('password')){
+
+        const hashed = await PasswordHash.toHash(this.get('password'));
+        this.set('password',hashed);
+    }
+
+    done();
+
+});
 
 userSchema.statics.build = (attrs: UserInterface) => {
 
