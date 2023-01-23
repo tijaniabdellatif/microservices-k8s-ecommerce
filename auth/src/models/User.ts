@@ -59,13 +59,7 @@ userSchema.statics.build = (attrs: UserInterface) => {
 const User = mongoose.model<any, UserDecorator>('User',userSchema);
 
  
-User.build({
 
-    email:'tijani@gmail.com',
-    password:'abdellatif23',
-    name:'franky'
-
-});
 
 
 export { User };
