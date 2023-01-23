@@ -1,10 +1,10 @@
 import express,{Request,Response} from 'express';
 import { validationResult,check } from 'express-validator';
-import bcrypt from 'bcryptjs';
 import jsonwebtoken from "jsonwebtoken";
 import { User } from '../models/User';
 import { RequestValidationError } from '../errors/RequestValidation';
 import { BadRequestError } from '../errors/BadRequestError';
+import { readBuilderProgram } from 'typescript';
 
 
 const router = express.Router();
@@ -40,6 +40,23 @@ router.post('/api/users/register',[
 
       const user = User.build({email,password,name});
       await user.save();
+      /**
+       * Generate json web token
+       */
+      const jwt = jsonwebtoken.sign({
+         
+             id:user.id,
+             email:user.email
+      },'secretkey');
+
+      /**
+       * Store the jwt on session object
+       */
+      req.session = {
+           jwt : jwt
+      };
+      console.log(req.session);
+
       res.status(201).send(user);
 
   });
