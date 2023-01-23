@@ -46,7 +46,10 @@ router.post('/api/users/register',[
       const jwt = jsonwebtoken.sign({
              id:user.id,
              email:user.email
-      },'secretkey');
+      },
+       process.env.jwt!
+      
+      );
 
       /**
        * Store the jwt on session object
