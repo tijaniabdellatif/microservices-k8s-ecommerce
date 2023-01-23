@@ -4,7 +4,7 @@ import jsonwebtoken from "jsonwebtoken";
 import { User } from '../models/User';
 import { RequestValidationError } from '../errors/RequestValidation';
 import { BadRequestError } from '../errors/BadRequestError';
-import { readBuilderProgram } from 'typescript';
+
 
 
 const router = express.Router();
@@ -44,7 +44,6 @@ router.post('/api/users/register',[
        * Generate json web token
        */
       const jwt = jsonwebtoken.sign({
-         
              id:user.id,
              email:user.email
       },'secretkey');
@@ -55,8 +54,6 @@ router.post('/api/users/register',[
       req.session = {
            jwt : jwt
       };
-      console.log(req.session);
-
       res.status(201).send(user);
 
   });
