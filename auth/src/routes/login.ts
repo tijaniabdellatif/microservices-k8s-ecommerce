@@ -1,7 +1,7 @@
 
 import express,{Request,Response} from 'express';
-import { validationResult,body } from 'express-validator';
-import { RequestValidationError } from '../errors/RequestValidation';
+import { body } from 'express-validator';
+import { validateRequest } from '../middlewares/ValidateRequest';
 const router = express.Router();
 
 router.post('/api/users/login',[
@@ -14,14 +14,10 @@ router.post('/api/users/login',[
     .trim()
     .notEmpty()
     .withMessage('Please supply a password')
-],async (req:Request,res:Response) => {
+],validateRequest,async (req:Request,res:Response) => {
 
-      const errors = validationResult(req);
+    
 
-      console.log(errors);
-      if(!errors.isEmpty()){
-        throw new RequestValidationError(errors.array());
-    }
 
 });
 

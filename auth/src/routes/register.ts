@@ -1,9 +1,9 @@
 import express,{Request,Response} from 'express';
-import { validationResult,check } from 'express-validator';
+import { check } from 'express-validator';
 import jsonwebtoken from "jsonwebtoken";
 import { User } from '../models/User';
-import { RequestValidationError } from '../errors/RequestValidation';
 import { BadRequestError } from '../errors/BadRequestError';
+import { validateRequest } from '../middlewares/ValidateRequest';
 const router = express.Router();
 router.post('/api/users/register',[
 
@@ -21,12 +21,9 @@ router.post('/api/users/register',[
     .withMessage('Do not use a common word as the password')
     .isLength({ min: 5 , max:20})
     .matches(/\d/)
-], async (req: Request,res: Response) => {
+
+],validateRequest, async (req: Request,res: Response) => {
    
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        throw new RequestValidationError(errors.array());
-    }
 
       const {email,password,name} = req.body;
       const existingUser = await User.findOne({email});
