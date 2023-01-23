@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import {json} from 'body-parser';
 import mongoose, { mongo } from 'mongoose';
+import cookieSession from 'cookie-session';
 
 import { currentUserRouter } from './routes/current';
 import { userLogOut } from './routes/logout';
@@ -11,7 +12,14 @@ import { errorHandler } from './middlewares/ErrorHandler';
 import { NotFound } from './errors/NotFound';
 
 const app = express();
+app.settings('trust proxy',true);
 app.use(json());
+app.use(cookieSession({
+
+    signed:false,
+    secure:true
+
+}));
 app.use(currentUserRouter);
 app.use(userLogin);
 app.use(userLogOut);
