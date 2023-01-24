@@ -13,10 +13,7 @@ router.get('/api/users/current',async (req:Request,res:Response) => {
 
           res.send({curentUser:null});
        }
-      
-
-    
-
+   
 });
 
 export { router as currentUserRouter };
