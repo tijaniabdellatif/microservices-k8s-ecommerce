@@ -1,8 +1,14 @@
-import express from 'express';
+import express, {Request,Response}from 'express';
 const router = express.Router();
-router.post('/api/users/logout',(req,res) => {
+router.post('/api/users/logout',async (req: Request,res: Response) => {
 
-    res.send('Hi wolrd');
+   /**
+    * Destroying session
+    */
+
+   req.session = null;
+
+   res.send({});
 
 
 });
