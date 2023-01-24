@@ -8,8 +8,6 @@ export class RequestValidationError extends CustomError{
            super('invalid request parametre');
            /* Implementing */
            Object.setPrototypeOf(this,RequestValidationError.prototype);
-
-
     }
 
     serializeErrors(){

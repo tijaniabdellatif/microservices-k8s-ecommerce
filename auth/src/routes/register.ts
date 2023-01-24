@@ -4,9 +4,6 @@ import jsonwebtoken from "jsonwebtoken";
 import { User } from '../models/User';
 import { RequestValidationError } from '../errors/RequestValidation';
 import { BadRequestError } from '../errors/BadRequestError';
-
-
-
 const router = express.Router();
 
 router.post('/api/users/register',[
