@@ -42,8 +42,7 @@ export const CurrentUserMiddlleware = (
             req.currentUser = payload;
 
         }catch(error){
-
-
+            res.status(501).send(error);
         }
 
         next();
