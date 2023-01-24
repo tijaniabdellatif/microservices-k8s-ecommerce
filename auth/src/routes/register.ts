@@ -6,6 +6,11 @@ import { RequestValidationError } from '../errors/RequestValidation';
 import { BadRequestError } from '../errors/BadRequestError';
 const router = express.Router();
 
+
+/**
+ * @soufyen004 
+ * Study this case and test it in postman
+ */
 router.post('/api/users/register',[
 
    check('name','Name is required')
