@@ -3,17 +3,10 @@ import {app} from '../../app';
 
 it('get current users details',async ()=>{
 
-    const authresponse = await request(app)
-    .post('/api/users/register')
-    .send({
-
-        name:'tijani abdellatif',
-        email:'test@test.com',
-        password:'qazxswedc12'
-
-    }).expect(201);
-
-    const cookie = authresponse.get("Set-Cookie");
+    /**
+     * Global function created in the setup test file
+     */
+  const cookie = await register();
 
    const response =  await request(app)
     .get('/api/users/current')
