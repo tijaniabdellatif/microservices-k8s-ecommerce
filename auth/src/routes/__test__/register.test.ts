@@ -73,3 +73,24 @@ it('return 400 with missing email and password and name',async () =>{
 });
 
 
+it('disallows duplicate emails',async () =>{
+
+  await request(app)
+  .post('/api/users/register')
+  .send({
+      name:'tijani abdellatif',
+      email:'tijani@tijani.ma',
+      password:'qazwsxedc12'
+  }).expect(201)
+
+  await request(app)
+  .post('/api/users/register')
+  .send({
+      name:'tijani abdellatif',
+      email:'tijani@tijani.ma',
+      password:'qazwsxedc12'
+  }).expect(400)
+
+
+});
+
