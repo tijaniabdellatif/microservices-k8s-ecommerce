@@ -74,7 +74,6 @@ it('return 400 with missing email and password and name',async () =>{
 
 
 it('disallows duplicate emails',async () =>{
-
   await request(app)
   .post('/api/users/register')
   .send({
@@ -93,4 +92,21 @@ it('disallows duplicate emails',async () =>{
 
 
 });
+
+
+it('sets a cookie after success register',async ()=>{
+    const response = await request(app)
+    .post('/api/users/register')
+    .send({
+        name:'tijani abdellatif',
+        email:'tijani@tijani.ma',
+        password:'qazwsxedc12'
+    }).expect(201);
+
+    /**
+     * Inspect response data if contain cookie headers
+     */
+    expect(response.get('Set-Cookie')).toBeDefined();
+
+})
 
