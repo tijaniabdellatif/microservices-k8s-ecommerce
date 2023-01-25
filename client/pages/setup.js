@@ -1,6 +1,6 @@
 const Setup = () =>{
 
-     return <h1>Setup</h1>
+     return <h1>hi</h1>
 }
 
 export default Setup;
