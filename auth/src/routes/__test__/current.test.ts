@@ -15,4 +15,15 @@ it('get current users details',async ()=>{
     
     expect(response.body.currentUser.email).toEqual('test@test.com');
 
+});
+
+it('response null if not authorized',async () =>{
+
+    const response = await request(app)
+    .get('/api/users/current')
+    .send()
+    .expect(401);
+
+    console.log(response.body);
+    expect(response.body.currentUser).toEqual(undefined);
 })
