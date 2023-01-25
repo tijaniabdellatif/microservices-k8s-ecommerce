@@ -4,8 +4,9 @@ import {app} from '../app';
 
 let mongo: any;
 beforeAll(async () =>{
-    mongo = new MongoMemoryServer();
-    const mongoUri = await mongo.getUri();
+    process.env.jwt = 'mysecrettoken';
+    mongo = await MongoMemoryServer.create();
+    const mongoUri = mongo.getUri();
     await mongoose.connect(mongoUri,{
 
         family:4
@@ -14,17 +15,16 @@ beforeAll(async () =>{
 });
 
 beforeEach(async() =>{
-
     const collections = await mongoose.connection.db.collections();
-
     for(let collection of collections){
-
           await collection.deleteMany({})
     }
 });
 
 afterAll( async () =>{
-
-      await mongo.stop();
+     if(mongo){
+        await mongo.stop();
+     }
+     
       await mongoose.connection.close();
 })
