@@ -1,10 +1,12 @@
-import Image from "next/image";
-import { useState,useEffect } from "react";
-import { useTheme } from "next-themes";
+
+import Layout from "../layouts/Body";
 
 const Index = () =>{
-      const {theme,setTheme} = useTheme();
-    // const currentTheme = theme === 'system' ? systemTheme : theme;
+  
+   return (
+
+      <Layout />
+   );
      
 }
 

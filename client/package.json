@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "bootstrap": "^5.2.3",
     "next": "^13.1.5",
     "next-themes": "^0.2.1",
