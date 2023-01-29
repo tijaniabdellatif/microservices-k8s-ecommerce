@@ -1,11 +1,16 @@
+import Document from "../layouts/Document";
 
-import Layout from "../layouts/Body";
 
 const Index = () =>{
   
    return (
-
-      <Layout />
+    <>
+  
+         <Document>
+           
+         </Document>
+    </>
+      
    );
      
 }
