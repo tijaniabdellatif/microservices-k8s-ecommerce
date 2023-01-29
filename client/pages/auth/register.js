@@ -5,8 +5,7 @@ function Register(){
      
         <>
           <Document>
-            <h1 className="font-quicksand">hello one</h1>
-            <h1 className="font-roboto">Hello two</h1>
+         
           </Document>
 
          
