@@ -4,7 +4,7 @@ import Header from "./Header";
 import {Navbar} from "../components/Navbar";
 import {MenuIcon,CubeIcon} from "@heroicons/react/outline";
 import Link from "next/link";
-
+import ResponsiveMode from "./ResponsiveMode";
 
 const Document = ({children}) =>{
   
@@ -71,8 +71,12 @@ const Document = ({children}) =>{
              </div>
          </Navbar>
 
+         <ResponsiveMode />
+
+         
+
         
-        <div className="container h-40">
+        <div className="container h-full">
             {children}
         </div>
 
