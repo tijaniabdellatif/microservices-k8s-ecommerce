@@ -11,14 +11,10 @@ router.post('/api/users/register',[
     .not().isEmpty(),
 
     check('email','Please include a valid email')
-    .optional({ checkFalsy: true, nullable: true })
      .isEmail(),
 
     check('password', 'The password must be 5+ chars long and contain a number')
     .trim()
-    .not()
-    .isIn(['password', '123456', 'godthing'])
-    .withMessage('Do not use a common word as the password')
     .isLength({ min: 5 , max:20})
     .matches(/\d/)
 

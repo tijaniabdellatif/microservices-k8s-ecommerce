@@ -6,8 +6,12 @@ metadata:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
+  tls:
+  - secretName: listcoins-dev-tls
+    hosts:
+    - "listcoins.dev"
   rules:
-  - host: listcoins.dev #127.0.0.1
+  - host: listcoins.dev
     http:
       paths:
       - pathType: Prefix
