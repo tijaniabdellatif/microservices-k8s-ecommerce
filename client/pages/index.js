@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Index = ({ current }) =>{
   
-   console.log(current);
+   // console.log(current);
     
    return (
     <>
@@ -19,17 +19,15 @@ const Index = ({ current }) =>{
 
 
 Index.getInitialProps = async () => {
+   // console.log('Im on server');
+   // const response = await axios.get('/api/users/current').catch(err =>{
+   //      console.log(err);
+   // })
+
+   console.log('i was executed on the server');
 
 
-   console.log('Im on server');
-
-   const response = await axios.get('/api/users/current').catch(err =>{
-
-        console.log(err);
-   })
-
-
-   return {response:response};
+   return {};
 
 };
 
