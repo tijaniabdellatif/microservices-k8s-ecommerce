@@ -1,65 +1,37 @@
 import Document from "../../layouts/Document";
 import Link from "next/link";
 import { useState,useRef, useEffect} from "react";
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from 'next/router';
-import { removeDuplicates } from "../../helpers/functions";
+import useRequest from "../../hooks/useRequest";
+
 function Register(){
 
   const [name,setName] = useState('');
   const [password,setPassword] = useState('');
   const [email,setEmail] = useState('');
-  const [errors,setErrors] = useState(null);
-  const [loader,setLoader]=useState(false);
   const firstUpdate = useRef(true);
-  const router = useRouter();
   const [isError,setIsError] = useState(false);
+  const {doRequest,errors,loader} = useRequest({
+
+      url:'/api/users/register',
+      method:'post',
+      body:{
+          name,email,password
+      },
+      route:'/'
+
+  });
    
    const onSubmit = async (event) =>{
-
      event.preventDefault();
-
-     try {
-
-
-      setIsError(false);
-      setLoader(true);
-      const response = await axios.post('/api/users/register',{
-        email,password,name
-    });
-
-
-    setLoader(false);
-    setEmail("");
-    setPassword('');
-    setName('');
-    toast.success('Accounted created',{
-
-        position: toast.POSITION.TOP_RIGHT,
-      
-    });
-    router.push("/auth/login");
-
-     }catch(err){
-
-         setLoader(true);
-         setIsError(true);
-         const errorsArray = removeDuplicates(err.response.data.errors,'field');
-         setErrors(errorsArray);
-
-         setTimeout(() =>{
-              setLoader(false);
-         },2000)
-         
-        
-     }    
+     await doRequest();
    }
 
    useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
+
       return;
     }
 
@@ -77,10 +49,6 @@ function Register(){
             delay: 500
           });
       })
-      
-     
-      
-   
   },[errors]);
 
 
@@ -88,10 +56,7 @@ function Register(){
  
 
   const onInput = () => {
-
-       
       if(errors){
-
          setIsError(false);
       }   
   }
