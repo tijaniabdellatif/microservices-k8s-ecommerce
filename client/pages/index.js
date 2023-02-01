@@ -19,14 +19,20 @@ const Index = ({ current }) =>{
 
 
 Index.getInitialProps = async () => {
-   // console.log('Im on server');
-   // const response = await axios.get('/api/users/current').catch(err =>{
-   //      console.log(err);
-   // })
+  
+   if(typeof window === 'undefined'){
 
-   console.log('i was executed on the server');
+      console.log('we are on the server')
+      //requiest should be mapped to ingress-ngnix
+
+   }
+   else {
 
 
+        console.log('we are inside the browser')
+        //request cann be made with a base url
+   }
+  
    return {};
 
 };
