@@ -1,18 +1,21 @@
 import Document from "../../layouts/Document";
 import Link from "next/link";
-import { useState,useRef, useLayoutEffect} from "react";
+import { useState,useRef, useEffect} from "react";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useRouter } from 'next/router';
+import { removeDuplicates } from "../../helpers/functions";
 function Register(){
 
   const [name,setName] = useState('');
   const [password,setPassword] = useState('');
   const [email,setEmail] = useState('');
-  const [errors,setErrors] = useState([]);
+  const [errors,setErrors] = useState(null);
   const [loader,setLoader]=useState(false);
   const firstUpdate = useRef(true);
+  const router = useRouter();
+  const [isError,setIsError] = useState(false);
    
    const onSubmit = async (event) =>{
 
@@ -20,6 +23,8 @@ function Register(){
 
      try {
 
+
+      setIsError(false);
       setLoader(true);
       const response = await axios.post('/api/users/register',{
         email,password,name
@@ -27,16 +32,24 @@ function Register(){
 
 
     setLoader(false);
-    toast.success('Good work');
-    
+    setEmail("");
+    setPassword('');
+    setName('');
+    toast.success('Accounted created',{
+
+        position: toast.POSITION.TOP_RIGHT,
+      
+    });
+    router.push("/auth/login");
 
      }catch(err){
 
-        setLoader(true);
-         setErrors(err.response.data.errors);
+         setLoader(true);
+         setIsError(true);
+         const errorsArray = removeDuplicates(err.response.data.errors,'field');
+         setErrors(errorsArray);
 
          setTimeout(() =>{
-
               setLoader(false);
          },2000)
          
@@ -44,21 +57,44 @@ function Register(){
      }    
    }
 
-   useLayoutEffect(() => {
+   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
     }
 
     if(!errors){
+
+        setIsError(false);
         return;
     }
 
+
+      setIsError(true);
       errors.forEach(it=>{
-          toast.error(it.message);
+          toast.error(it.message,{
+            position: toast.POSITION.TOP_RIGHT,
+            delay: 500
+          });
       })
+      
+     
+      
    
   },[errors]);
+
+
+
+ 
+
+  const onInput = () => {
+
+       
+      if(errors){
+
+         setIsError(false);
+      }   
+  }
 
 
 
@@ -80,20 +116,21 @@ function Register(){
                                     <label htmlFor="name" className="text-gray-600 mb-2 block">Full name
                                     <span className="text-dark-danger mx-1">*</span>
                                     </label>
-                                    <input placeholder="full name"  value={name} onChange={e => setName(e.target.value)} type="text" className="input-box" />
+                                    <input placeholder="full name"  value={name} onInput={onInput} onChange={e => setName(e.target.value)} type="text"  className={isError ? 'input-box-error':'input-box'} />
+                                 
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="text-gray-600 mb-2 block">Email Address
                                     <span className="text-dark-danger mx-1">*</span>
                                     </label>
-                                    <input placeholder="example@example.org" value={email} onChange={e=>setEmail(e.target.value)} type="email" className="input-box" />
+                                    <input placeholder="example@example.org" onInput={onInput} value={email} onChange={e=>setEmail(e.target.value)} type="email" className={isError ? 'input-box-error':'input-box'} />
                                 </div>
 
                                 <div>
                                     <label htmlFor="password" className="text-gray-600 mb-2 block">Password
                                     <span className="text-dark-danger mx-1">*</span>
                                     </label>
-                                    <input placeholder="8 minimum length, number included" value={password} onChange={e => setPassword(e.target.value)} type="password" className="input-box" />
+                                    <input placeholder="8 minimum length, number included" onInput={onInput} value={password} onChange={e => setPassword(e.target.value)} type="password"  className={isError ? 'input-box-error':'input-box'} />
                                 </div>
 
                                

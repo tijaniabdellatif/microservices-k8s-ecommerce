@@ -10,5 +10,11 @@
       @apply w-full block border border-gray-300 px-4 py-3 text-gray-600
       rounded-md text-sm shadow-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 placeholder-gray-400
   }
+
+  .input-box-error{
+
+    @apply w-full block border border-red-500 px-4 py-3 text-gray-600
+    rounded-md text-sm shadow-sm placeholder-gray-400
+  }
       
 }
