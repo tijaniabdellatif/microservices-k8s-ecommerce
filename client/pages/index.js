@@ -1,14 +1,15 @@
 import Document from "../layouts/Document";
+import axios from 'axios';
 
-
-const Index = ({ color }) =>{
+const Index = ({ current }) =>{
   
-   console.log('Im inside the component',color);
+   console.log(current);
+    
    return (
     <>
   
          <Document>
-           
+            <h1>After Sign in</h1>
          </Document>
     </>
       
@@ -17,11 +18,18 @@ const Index = ({ color }) =>{
 }
 
 
-Index.getInitialProps = () => {
+Index.getInitialProps = async () => {
 
 
    console.log('Im on server');
-   return {color:'red'};
+
+   const response = await axios.get('/api/users/current').catch(err =>{
+
+        console.log(err);
+   })
+
+
+   return {response:response};
 
 };
 

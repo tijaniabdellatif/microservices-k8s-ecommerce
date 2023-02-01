@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-
 import {removeDuplicates} from "../helpers/functions"
 
 export default ({url,method,body,onSuccess}) =>{
@@ -11,8 +10,6 @@ export default ({url,method,body,onSuccess}) =>{
    
 
     const doRequest = async () =>{
-
-
           try{
                 setErrors(null);
                 setLoader(true);
