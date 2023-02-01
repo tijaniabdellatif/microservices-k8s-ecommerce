@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+
 import {removeDuplicates} from "../helpers/functions"
 
-export default ({url,method,body,route}) =>{
+export default ({url,method,body,onSuccess}) =>{
 
     const [errors,setErrors] = useState(null);
     const [loader,setLoader]=useState(false);
-    const router = useRouter();
+   
 
     const doRequest = async () =>{
 
@@ -23,9 +23,11 @@ export default ({url,method,body,route}) =>{
                     position: toast.POSITION.TOP_RIGHT,
                   
                 });
-                router.push(route);
+            
+                  if(onSuccess){
 
-                return response.data;
+                      onSuccess(response.data)
+                  }
 
 
           }catch(err){
