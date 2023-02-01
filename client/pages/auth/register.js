@@ -14,6 +14,7 @@ function Register(){
   const firstUpdate = useRef(true);
   const [isError,setIsError] = useState(false);
   const router = useRouter();
+  
   const {doRequest,errors,loader} = useRequest({
       url:'/api/users/register',
       method:'post',

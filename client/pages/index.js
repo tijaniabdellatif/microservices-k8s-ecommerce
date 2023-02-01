@@ -1,8 +1,9 @@
 import Document from "../layouts/Document";
 
 
-const Index = () =>{
+const Index = ({ color }) =>{
   
+   console.log('Im inside the component',color);
    return (
     <>
   
@@ -14,5 +15,14 @@ const Index = () =>{
    );
      
 }
+
+
+Index.getInitialProps = () => {
+
+
+   console.log('Im on server');
+   return {color:'red'};
+
+};
 
 export default Index;
