@@ -1,15 +1,32 @@
 import Document from "../layouts/Document";
 import axios from 'axios';
+import { useState,useLayoutEffect,useRef } from "react";
 
-const Index = ({ current }) =>{
+const Index = ({currentUser}) =>{
   
-   // console.log(current);
+   const [current,setCurrent] = useState(null);
+   const firstUpdate = useRef(true);
+
+   useLayoutEffect(() => {
+
+      if (firstUpdate.current) {
+         firstUpdate.current = false;
+         return;
+       }
+
+       setCurrent({currentUser});
+       
     
+    },[currentUser]);
+
+    console.log(current);
+   
+   
    return (
     <>
   
          <Document>
-            <h1>After Sign in</h1>
+           <h1> Hello world :  </h1>
          </Document>
     </>
       
@@ -18,23 +35,41 @@ const Index = ({ current }) =>{
 }
 
 
-Index.getInitialProps = async () => {
+
+
+Index.getInitialProps = async (context) => {
   
-   if(typeof window === 'undefined'){
+   
+       if(context.req){
+          
+            const response = await axios.get('http://ingress-nginx-controller.ingress-nginx/api/users/current',{
+              headers:context.req.headers
+            }).catch(error =>{
 
-      console.log('we are on the server')
-      //requiest should be mapped to ingress-ngnix
+                 console.log('this is my error ',error);
+            })
 
-   }
-   else {
+            if(response){
 
+                  return response.data;
+            }
+            else {
 
-        console.log('we are inside the browser')
-        //request cann be made with a base url
-   }
-  
-   return {};
+                 return {};
+            }
+       }
 
-};
+       else {
+
+         
+          const {data} = await axios.get('/api/users/current');
+
+            return data ? data:{};
+       
+       }
+      
+
+      }
+ 
 
 export default Index;

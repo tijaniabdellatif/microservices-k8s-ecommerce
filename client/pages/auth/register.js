@@ -91,7 +91,7 @@ function Register(){
                                     rounded-sm cursor-pointer" />
                                     <label htmlFor="agree" className="text-gray-400 ml-2 cursor-pointer">
                                       I have read and agree to the </label>
-                                      <Link href="#" className="text-dark-danger font-semibold text-sm leading-2 pl-1">Term and conditions ?</Link>
+                                      <Link href="#" className="text-dark-danger font-semibold text-sm leading-2 pl-1 hover:text-dark-danger">Term and conditions ?</Link>
                                 </div>
                             </div>
 

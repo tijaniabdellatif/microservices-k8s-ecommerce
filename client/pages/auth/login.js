@@ -83,8 +83,6 @@ function Login(){
     );
 }
 
-Login.getInitialProps = async (ctx) => {
-  return {}
-}
+
 
 export default Login;

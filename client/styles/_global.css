@@ -16,5 +16,10 @@
     @apply w-full block border border-red-500 px-4 py-3 text-gray-600
     rounded-md text-sm shadow-sm placeholder-gray-400
   }
+
+  .tijani {
+
+     @apply text-red-400 text-sm leading-3 font-medium font-quicksand
+  }
       
 }
