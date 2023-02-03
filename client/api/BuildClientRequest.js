@@ -2,20 +2,23 @@ import axios from 'axios';
 
 export default ({req}) =>{
 
-      if(req && typeof window === 'undefined'){
+      if(req){
+
+        console.log('on server');
 
             return axios.create({
 
-                    baseURL:'http://ingress-nginx-controller.ingress-nginx',
+                    baseURL:'http://10.1.2.58:3000',
                     headers:req.headers
 
             });
       }
-      if(!req) {
+      else {
+        console.log('on browser')
           return axios.create({
 
               baseURL : "/",
-              headers:req.headers
+             
           })
 
       }
