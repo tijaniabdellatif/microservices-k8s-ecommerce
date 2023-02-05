@@ -59,14 +59,14 @@ function Register(){
         <>
           <Document>
           <div className="container py-16">
-                    <div className="font-quicksand dark:bg-white max-w-lg mx-auto px-6 py-7 shadow rounded overflow-hidden ">
+                    <div className="font-quicksand dark:bg-white max-w-lg  mx-auto px-6 py-7 shadow rounded overflow-hidden ">
                         <h2 className="text-2xl dark:text-light-cta  uppercase font-medium mb-1">Create An Account</h2>
                         <p className="text-sm leading-3 text-gray-400 mb-6 dark:text-gray-800">Register if you dont't have an account</p>
 
                         <form onSubmit={onSubmit}>
                             <div className="space-y-4">
                             <div>
-                                    <label htmlFor="name" className="text-gray-600 mb-2 block">Full name
+                                    <label htmlFor="name" className="mb-2 text-gray-600 block">Full name
                                     <span className="text-dark-danger mx-1">*</span>
                                     </label>
                                     <input placeholder="full name"  value={name} onInput={onInput} onChange={e => setName(e.target.value)} type="text"  className={isError ? 'input-box-error':'input-box'} />
@@ -91,7 +91,7 @@ function Register(){
                                     rounded-sm cursor-pointer" />
                                     <label htmlFor="agree" className="text-gray-400 ml-2 cursor-pointer">
                                       I have read and agree to the </label>
-                                      <Link href="#" className="text-dark-danger font-semibold text-sm leading-2 pl-1">Term and conditions ?</Link>
+                                      <Link href="#" className="text-dark-danger font-semibold text-sm leading-2 pl-1 hover:text-dark-danger">Term and conditions ?</Link>
                                 </div>
                             </div>
 

@@ -12,10 +12,7 @@ export default ({Component,pageProps}) =>{
             <Component {...pageProps} />
         </ThemeProvider>
         <ToastContainer  />
-
-        </>
-        
-        
+        </>   
     );
 };
 

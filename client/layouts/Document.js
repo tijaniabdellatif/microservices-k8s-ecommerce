@@ -16,15 +16,11 @@ const Document = ({children}) =>{
             <link rel="icon" href="/favicon.ico" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={true} />
             <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap" rel="stylesheet" /> 
            
-          </Head>
-
- 
-         <Header />
-
-  
+    </Head>
+        <Header />
         <Navbar icon={<MenuIcon className="h-5 w-5" />}>
             <div className="position absolute left-0 top-full w-full bg-white 
             shadow-md py-3 invisible opacity-0 group-hover: opacity-100 group-hover:visible
@@ -72,23 +68,11 @@ const Document = ({children}) =>{
 
             </div>
         </Navbar>
-        
-        
-
          <ResponsiveMode />
-
-         
-
-        
         <div className="container h-full">
             {children}
         </div>
-
-
-            <Footer />
-         
-         
-         
+        <Footer />   
     </>
       
    );

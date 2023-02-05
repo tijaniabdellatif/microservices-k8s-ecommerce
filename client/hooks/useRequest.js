@@ -7,8 +7,6 @@ export default ({url,method,body,onSuccess}) =>{
 
     const [errors,setErrors] = useState(null);
     const [loader,setLoader]=useState(false);
-   
-
     const doRequest = async () =>{
           try{
                 setErrors(null);
@@ -36,7 +34,7 @@ export default ({url,method,body,onSuccess}) =>{
          setTimeout(() =>{
               setLoader(false);
          },2000)
-          }
+    }
 
     }
 

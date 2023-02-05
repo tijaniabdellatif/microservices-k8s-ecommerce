@@ -21,6 +21,7 @@ declare global {
           interface Request {
 
                   currentUser?:UserPayload
+
             }
     }
 }
@@ -42,6 +43,8 @@ export const CurrentUserMiddlleware = (
             req.currentUser = payload;
 
         }catch(error){
+
+            res.status(500).send({currentUser:null})
             
         }
 

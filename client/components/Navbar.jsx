@@ -29,7 +29,7 @@ export function Navbar ({icon,children}) {
                                         Shop
                                 </Link>
 
-                                <Link className="text-light-primary hover:text-light-cta hover:dark:text-dark-secondary transition font-semibold" href="#">
+                                <Link className="text-light-primary hover:text-light-cta hover:dark:text-dark-secondary transition font-semibold" href="/setup">
                                         About us
                                 </Link>
 
@@ -37,7 +37,7 @@ export function Navbar ({icon,children}) {
                                         contact us
                                 </Link>
                         </div>
-                        <Link className="ml-auto text-light-primary hover:text-light-cta hover:dark:text-dark-secondary transition font-semibold" href="#">
+                        <Link className="ml-auto text-light-primary hover:text-light-cta hover:dark:text-dark-secondary transition font-semibold" href="/auth/register">
                                         Login - Register
                         </Link>
                     </div>
