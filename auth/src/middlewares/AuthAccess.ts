@@ -5,7 +5,8 @@ import { notAuthorizedError } from "../errors/AuthorizationError";
 
 export const authAccess = (req:Request,res:Response,next:NextFunction) => {
       if(!req.currentUser){
-          throw new notAuthorizedError();
+        throw new notAuthorizedError();
+        
       }
 
       next();

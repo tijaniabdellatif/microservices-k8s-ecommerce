@@ -1,81 +1,74 @@
+import { useEffect, useState } from "react";
 import Document from "../layouts/Document";
-import BuildClientRequest from "../api/BuildClientRequest";
-import { useState,useLayoutEffect,useRef, useEffect } from "react";
+import { toast } from 'react-toastify';
+export async function getServerSideProps(context){
+   if(typeof window === 'undefined'){
+      const response = await fetch('http://10.109.202.122:3000/api/users/current',{
+         headers:context.req.headers,
+         method:'GET',
+         cache:'no-store'
+      });
+      const currentUser = await response.json();
 
-const Index = ({currentUser}) =>{
-  
-   const [current,setCurrent] = useState(null);
-   const firstUpdate = useRef(true);
+      return {
+           props:{
+              currentUser
+           }
+      }
+   }
+
+   else {
+
+      const response = await fetch('/api/users/current',{
+
+      headers:context.req.headers,
+      method:'GET'
+   });
+   const currentUser = await response.json();
 
    console.log(currentUser);
-//    useEffect(() => {
 
-//       if (firstUpdate.current) {
-//          firstUpdate.current = false;
-//          return;
-//        }
+   return {
+        props:{
 
-//        setCurrent({currentUser});
-       
-    
-//     },[currentUser]);
+            currentUser
+        }
+   }
 
-   
-   
-   return (
-    <>
-  
-         <Document>
-           <h1> Hello world :  </h1>
-         </Document>
-    </>
-      
-   );
+   }
      
 }
 
 
 
 
-Index.getInitialProps = async (context) => {
-  
-     console.log('Myy conntext',context);
+
+const Index =  ({currentUser}) =>{
+
+   const [authorized,setAuthorized] = useState(true);
+
+   useEffect(() =>{
+
+        if(currentUser.errors){
+
+            setAuthorized(false);
+            toast.error(currentUser.errors[0].message);
 
 
-       const {data} = await BuildClientRequest(context).get('/api/users/current');
+        }
 
-       return data;
+        setAuthorized(true);
+        
+   },[authorized]);
    
-     //   if(context.req){
-          
-     //        const response = await axios.get('http://ingress-nginx-controller.ingress-nginx/api/users/current',{
-     //          headers:context.req.headers
-     //        }).catch(error =>{
+   return (
 
-     //             console.log('this is my error ',error);
-     //        })
+      <Document>
+         <h1>{currentUser.currentUser ? <>YES</>:<>NO</>}</h1>
+      </Document>
+   );
+}
 
-     //        if(response){
-
-     //              return response.data;
-     //        }
-     //        else {
-
-     //             return {};
-     //        }
-     //   }
-
-     //   else {
-
-         
-     //      const {data} = await axios.get('/api/users/current');
-
-     //        return data ? data:{};
-       
-     //   }
-      
-
-      }
  
 
 export default Index;
