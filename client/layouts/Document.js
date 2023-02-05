@@ -69,7 +69,9 @@ const Document = ({children}) =>{
             </div>
         </Navbar>
          <ResponsiveMode />
-        <div className="container h-full">
+
+        
+        <div className="h-full">
             {children}
         </div>
         <Footer />   
