@@ -1,5 +1,5 @@
 import {useTheme} from "next-themes";
-import{SunIcon ,MoonIcon,UserGroupIcon,SearchIcon} from "@heroicons/react/solid";
+import{SunIcon ,MoonIcon,UserGroupIcon,SearchIcon,UserAddIcon} from "@heroicons/react/solid";
 import {useState, useEffect} from "react";
 
 import Link from 'next/link'
@@ -26,7 +26,7 @@ const CustomThemeChange = ({children}) => {
 
         else {
           return (
-            <MoonIcon className="w-6 h-6 text-gray-900 " role="button" onClick={() => setTheme('dark')} />
+            <MoonIcon className="w-6 h-6 text-dark-secondary " role="button" onClick={() => setTheme('dark')} />
           )
         }
      };
@@ -44,8 +44,22 @@ const CustomThemeChange = ({children}) => {
             hover:bg-transparent hover:dark:bg-white hover:text-dark-primary transition
             ">Search</button>
             </div>
-            <div>
+            <div className="flex justify-between align-center">
+            <div className="flex justif-between gap-4">
+              <Link href="/auth/login" className="flex flex-col group">
+              <UserGroupIcon className="h-6 h-6 text-dark-secondary dark:text-white group-hover:text-light-cta" />
+                <span className="font-quicksand text-sm leading-3 font-medium group-hover:text-light-cta">Sign in</span>
+                </Link>
+              
+              <Link href="/auth/register" className="flex flex-col group">
+                <UserAddIcon className="h-6 h-6 text-dark-secondary  dark:text-white group-hover:text-light-cta" />
+                <span className="font-quicksand text-sm leading-3 font-medium group-hover:text-light-cta">Sign up</span>
+                </Link>
+            </div>
+            <div className="flex gap-4 ml-5">
             {renderThemeChanger()}
+            </div>
+           
             </div>
            
             
