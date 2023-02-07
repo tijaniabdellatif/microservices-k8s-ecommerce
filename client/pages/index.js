@@ -1,13 +1,64 @@
-import { useEffect, useState } from "react";
-import Document from "../layouts/Document";
-import { toast } from 'react-toastify';
+
 import Link from "next/link";
-import { TruckIcon } from "@heroicons/react/outline";
-import CategoriesFeature from "../components/utils/CategoriesFeature";
+import { Navbar } from "../components/Navbar";
+import {MenuIcon,CubeIcon} from "@heroicons/react/outline";
+import Head from "next/head";
 
 export default function Index(){
 
-   return(<h1>Home page</h1>)
+   return(<>
+         <Head>
+         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+         <title>List coins - Home Page</title>
+         </Head>
+         <Navbar icon={<MenuIcon className="h-5 w-5" />}>
+            <div className="position absolute left-0 top-full w-full bg-white 
+            shadow-md py-3 invisible opacity-0 group-hover: opacity-100 group-hover:visible
+            transition duration-300 z-50 divide-y divide-light-cta divide-dashed">
+
+                <Link href="#" className="px-6 py-3 flex items-center 
+                hover:bg-slate-100 transition">
+                        <CubeIcon className="h-5 w-5 text-light-cta" />
+                        <span className="ml-6 text-gray-700 text-sm font-semibold font-popins">
+                            Premium
+                        </span>
+                </Link>
+
+                <Link href="#" className="px-6 py-3 flex items-center 
+                hover:bg-slate-100 transition">
+                        <CubeIcon className="h-5 w-5 text-light-cta" />
+                        <span className="ml-6 text-gray-700 text-sm font-semibold font-popins">
+                            Premium
+                        </span>
+                </Link>
+
+                <Link href="#" className="px-6 py-3 flex items-center 
+                hover:bg-slate-100 transition">
+                        <CubeIcon className="h-5 w-5 text-light-cta" />
+                        <span className="ml-6 text-gray-700 text-sm font-semibold font-popins">
+                            Premium
+                        </span>
+                </Link>
+
+                <Link href="#" className="px-6 py-3 flex items-center 
+                hover:bg-slate-100 transition">
+                        <CubeIcon className="h-5 w-5 text-light-cta" />
+                        <span className="ml-6 text-gray-700 text-sm font-semibold font-popins">
+                            Premium
+                        </span>
+                </Link>
+
+                <Link href="#" className="px-6 py-3 flex items-center 
+                hover:bg-slate-100 transition">
+                        <CubeIcon className="h-5 w-5 text-light-cta" />
+                        <span className="ml-6 text-gray-700 text-sm font-semibold font-popins">
+                            Premium
+                        </span>
+                </Link>
+
+            </div>
+        </Navbar>
+   </>)
 }
 // export async function getServerSideProps(context){
 //    if(typeof window === 'undefined'){

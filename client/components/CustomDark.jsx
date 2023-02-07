@@ -1,7 +1,7 @@
 import {useTheme} from "next-themes";
 import{SunIcon ,MoonIcon,UserGroupIcon,SearchIcon} from "@heroicons/react/solid";
 import {useState, useEffect} from "react";
-import { HeartIcon,ShoppingCartIcon} from "@heroicons/react/outline";
+
 import Link from 'next/link'
 const CustomThemeChange = ({children}) => {
 
@@ -44,28 +44,6 @@ const CustomThemeChange = ({children}) => {
             hover:bg-transparent hover:dark:bg-white hover:text-dark-primary transition
             ">Search</button>
             </div>
-            <div className="space-x-4 flex items-center">
-            <Link href="/auth/register" className="block text-center text-gray-700 hover:text-light-cta transition relative flex flex-col items-center">
-            
-             <UserGroupIcon className="w-6 h-6 text-gray-900 dark:text-white" />
-             <div className="text-xs dark:text-white">Account</div>
-             </Link>
-           
-             <Link href="#" className="block text-center text-gray-700 hover:text-light-cta transition relative flex flex-col items-center">
-             <span className="absolute text-center left-7 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-dark-cta text-white text-xs
-            ">5</span>
-             <HeartIcon className="w-6 h-6 text-gray-900 dark:text-white" />
-             <div className="text-xs dark:text-white leading-3">Wish List</div>
-             </Link>
-           
-             <Link href="#" className="block text-center text-gray-700 hover:text-light-cta transition relative flex flex-col items-center">
-             <span className="absolute text-center left-4 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-dark-cta text-white text-xs
-            ">5</span>
-             <ShoppingCartIcon className="w-6 h-6 text-gray-900 dark:text-white" />
-             <div className="text-xs dark:text-white">Cart</div>
-             </Link>
-            </div>
-
             <div>
             {renderThemeChanger()}
             </div>
