@@ -6,9 +6,11 @@ import {MenuIcon,CubeIcon} from "@heroicons/react/outline";
 import Link from "next/link";
 import ResponsiveMode from "./ResponsiveMode";
 
-const Document = ({children}) =>{
-  
 
+
+const Document = ({children}) =>{
+
+    
    return (
     <>
     <Head>
@@ -80,5 +82,8 @@ const Document = ({children}) =>{
    );
      
 }
+
+
+
 
 export default Document;

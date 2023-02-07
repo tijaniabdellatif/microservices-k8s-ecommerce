@@ -13,7 +13,7 @@ export default ({url,method,body,onSuccess}) =>{
                 setLoader(true);
                 const response = await axios[method](url,body);
                 setLoader(false);
-                toast.success('Accounted created',{
+                toast.success('Action is Success',{
 
                     position: toast.POSITION.TOP_RIGHT,
                   
@@ -30,7 +30,6 @@ export default ({url,method,body,onSuccess}) =>{
         setLoader(true);
         const errorsArray = removeDuplicates(err.response.data.errors,'field');
          setErrors(errorsArray);
-
          setTimeout(() =>{
               setLoader(false);
          },2000)

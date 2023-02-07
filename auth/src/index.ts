@@ -3,7 +3,7 @@ import { app } from './app';
 const start = async () =>{
 
   if(!process.env.jwt){
-     throw new Error('Json web Token is not defined');
+     throw new Error('Error jwt connexion');
   }
   try{
     await mongoose.connect('mongodb://auth-mongo-srv:27017/auth',{

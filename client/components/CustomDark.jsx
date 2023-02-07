@@ -12,10 +12,12 @@ const CustomThemeChange = ({children}) => {
         setMounted(true);
       },[])
 
+    
     const renderThemeChanger= () => {
         if(!mounted) return null;
         const currentTheme = theme === "system" ? systemTheme : theme ;
 
+        console.log('current theme : ',currentTheme)
         if(currentTheme ==="dark"){
           return (
             <SunIcon className="w-6 h-6 text-yellow-500 " role="button" onClick={() => setTheme('light')} />
