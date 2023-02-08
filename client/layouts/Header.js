@@ -1,9 +1,11 @@
 import Logo from "../components/Logo";
 import CustomThemeChange from "../components/CustomDark";
-const Header = () => {
-
+const Header = ({currentUser}) => {
+   
+   
       return (
-         <CustomThemeChange>
+       
+         <CustomThemeChange currentUser={currentUser}>
           <Logo />
          </CustomThemeChange>
       );

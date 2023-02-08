@@ -1,16 +1,25 @@
 import {useTheme} from "next-themes";
-import{SunIcon ,MoonIcon,UserGroupIcon,SearchIcon,UserAddIcon} from "@heroicons/react/solid";
+import{SunIcon ,MoonIcon,UserGroupIcon,SearchIcon,UserAddIcon,UserCircleIcon} from "@heroicons/react/solid";
 import {useState, useEffect} from "react";
 
 import Link from 'next/link'
-const CustomThemeChange = ({children}) => {
+const CustomThemeChange = ({children,currentUser}) => {
 
     const {systemTheme , theme, setTheme} = useTheme ();
     const [mounted, setMounted] = useState(false);
+    const [user,setUser] = useState(null);
 
     useEffect(() =>{
+       
+        
         setMounted(true);
-      },[])
+
+        if(currentUser !==  null){
+
+           setUser(currentUser);
+        }
+        
+      },[mounted])
 
     
     const renderThemeChanger= () => {
@@ -44,8 +53,17 @@ const CustomThemeChange = ({children}) => {
             hover:bg-transparent hover:dark:bg-white hover:text-dark-primary transition
             ">Search</button>
             </div>
+
+           
             <div className="flex justify-between align-center">
-            <div className="flex justif-between gap-4">
+
+             {
+              user  ?  <div className="flex justify-between align-center gap-4">
+              <Link href="#" className="flex items-center group gap-3">
+              <UserCircleIcon className="h-6 h-6 text-dark-secondary dark:text-white group-hover:text-light-cta" />
+                <span className="font-quicksand text-sm leading-3 font-medium group-hover:text-light-cta">{user.email}</span>
+                </Link>
+            </div> :   <div className="flex justify-between gap-4">
               <Link href="/auth/login" className="flex flex-col group">
               <UserGroupIcon className="h-6 h-6 text-dark-secondary dark:text-white group-hover:text-light-cta" />
                 <span className="font-quicksand text-sm leading-3 font-medium group-hover:text-light-cta">Sign in</span>
@@ -56,6 +74,9 @@ const CustomThemeChange = ({children}) => {
                 <span className="font-quicksand text-sm leading-3 font-medium group-hover:text-light-cta">Sign up</span>
                 </Link>
             </div>
+             }
+          
+
             <div className="flex gap-4 ml-5">
             {renderThemeChanger()}
             </div>

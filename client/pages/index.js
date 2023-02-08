@@ -4,9 +4,7 @@ import { Navbar } from "../components/Navbar";
 import {MenuIcon,CubeIcon} from "@heroicons/react/outline";
 import Head from "next/head";
 
- function Index({currentUser}){
-
-    console.log('From component',currentUser)
+ const Index = ({currentUser}) => {
    return(<>
          <Head>
          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,47 +63,36 @@ import Head from "next/head";
 
 Index.getInitialProps = async (context) =>  {
 
-    if(typeof window === 'undefined'){
-       const response = await fetch('http://10.98.203.124:3000/api/users/current',{
-          headers:context.req.headers,
-          method:'GET',
-          cache:'no-store'
-       });
-
-      
-       const currentUser = await response.json();
-       console.log('backend : ',currentUser)
-      
- 
-    
-       return {
-            props:{
-               currentUser
-            }
-       }
+    console.log('Landing page');
+    if(typeof window === 'undefined' && context.req){
+        const response = await fetch('http://10.102.202.216:3000/api/users/current',{
+            headers:context.req.headers,
+            method:'GET',
+            cache:'no-store'
+         });
+  
+        
+         const currentUser = await response.json();
+         return {
+              
+                currentUser
+              
+         }
     }
 
-    else {
- 
+
         const response = await fetch('/api/users/current',{
- 
-        method:'GET'
-     });
-     const currentUser = await response.json();
-  
-     console.log('current user front',currentUser);
-  
-     return {
-          props:{
-  
-              currentUser
-          }
-     }
-  
-     }
- 
-   
-      
+           
+            method:'GET',
+            cache:'no-store'
+         });
+
+         const currentUser = await response.json();
+         return {
+
+            currentUser
+         }
+    
  }
 
 

@@ -41,12 +41,12 @@ export function Navbar ({icon,children}) {
                                         Login - Register
                         </Link> */}
                  <div className="space-x-4 flex items-center">
-                        <Link href="/auth/register" className="block text-center text-white hover:text-light-cta transition relative flex flex-col items-center">
+                        {/* <Link href="/auth/register" className="block text-center text-white hover:text-light-cta transition relative flex flex-col items-center">
                         
                         <UserGroupIcon className="w-6 h-6 text-white dark:text-white" />
                         <div className="text-xs dark:text-white">Account</div>
                         </Link>
-                        
+                         */}
                         <Link href="#" className="block text-center text-white hover:text-light-cta transition relative flex flex-col items-center">
                         <span className="absolute text-center left-7 -top-1 w-4 h-4 rounded-full flex items-center justify-center bg-dark-cta text-white text-xs
                         ">5</span>

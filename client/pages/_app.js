@@ -11,11 +11,14 @@ import Footer from "../layouts/Footer";
 
 
 
-const AppComponent =  ({Component,pageProps}) =>{
+const AppComponent =  ({Component,pageProps,currentUser}) =>{
+   
+    console.log(currentUser)
     return (
         <>
         <ThemeProvider enableSystem={true} attribute="class">
-            <Header />
+         
+            <Header currentUser={currentUser} />
             <ResponsiveMode />
             <Component {...pageProps} />
             <Footer />
@@ -26,57 +29,89 @@ const AppComponent =  ({Component,pageProps}) =>{
     );
 };
 
-
-AppComponent.getInitialProps = async ({Component,ctx}) =>  {
+AppComponent.getInitialProps = async (appContext) => {
 
     let pageProps = {};
-    
-    if(typeof window === 'undefined'){
+    if(typeof window === 'undefined' && appContext.ctx.req){
+        const response = await fetch('http://10.102.202.216:3000/api/users/current',{
+            headers:appContext.ctx.req.headers,
+            method:'GET',
+            cache:'no-store'
+         });
+         const currentUser = await response.json();
 
+         
+         if(appContext.Component.getInitialProps){
+            pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+         }
+
+         if(currentUser.errors){
+
+              return { 
+                 currentUser:null
+              }
+         }
+          
        
-       const response = await fetch('http://10.98.203.124:3000/api/users/current',{
-          headers:ctx.req.headers,
-          method:'GET',
-          cache:'no-store'
-       });
-
-       if(Component.getInitialProps){
-
-         pageProps = await Component.getInitialProps(ctx);
-       }
-       console.log("Page props",pageProps);
-       const currentUser = await response.json();
-        console.log('from appComponnent',currentUser);
-      
- 
-    
-       return {
-            props:{
-               currentUser:currentUser.currentUser
-            }
-       }
-    }
- 
-    else {
- 
-       const response = await fetch('/api/users/current',{
-
-       method:'GET'
-    });
-    const currentUser = await response.json();
- 
-    console.log('current user front',currentUser);
- 
-    return {
-         props:{
- 
-             currentUser
+         return {
+              
+                 ...currentUser,
+                 pageProps
+              
          }
     }
- 
-    }
-      
- }
+
+    
+
+        const response = await fetch('/api/users/current',{
+           
+            method:'GET',
+            cache:'no-store'
+         });
+
+         const currentUser = await response.json();
+         return {
+
+            currentUser
+         }
+    
+
+}
+
+// AppComponent.getInitialProps = async ({Component,ctx}) =>  {
+
+//     let pageProps = {};
+       
+//     if(typeof window === 'undefined'){
+//         const response = await fetch('http://10.98.203.124:3000/api/users/current',{
+//             headers:ctx.req.headers,
+//             method:'GET',
+//             cache:'no-store'
+//          });
+        
+//          const currentUser = await response.json();
+//          if(Component.getInitialProps){
+  
+//            pageProps = await Component.getInitialProps(ctx);
+           
+//            return {
+
+//             ...currentUser,
+//             pageProps:pageProps
+//         }
+//         }
+//         else {
+
+//             return {
+//                 currentUser:currentUser
+//             } 
+
+//         }  
+//     }
+
+    
+     
+//  }
 
 
  export default AppComponent;
