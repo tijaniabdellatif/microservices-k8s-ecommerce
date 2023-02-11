@@ -12,8 +12,6 @@ import Footer from "../layouts/Footer";
 
 
 const AppComponent =  ({Component,pageProps,currentUser}) =>{
-   
-    console.log(currentUser)
     return (
         <>
         <ThemeProvider enableSystem={true} attribute="class">
@@ -33,7 +31,7 @@ AppComponent.getInitialProps = async (appContext) => {
 
     let pageProps = {};
     if(typeof window === 'undefined' && appContext.ctx.req){
-        const response = await fetch('http://10.102.202.216:3000/api/users/current',{
+        const response = await fetch('http://10.106.66.79:3000/api/users/current',{
             headers:appContext.ctx.req.headers,
             method:'GET',
             cache:'no-store'
