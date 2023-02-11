@@ -1,17 +1,12 @@
-interface Color {
+export * from "./errors/BadRequestError";
+export * from "./errors/AuthorizationError";
+export * from "./errors/CustomError";
+export * from "./errors/DatabaseError";
+export * from "./errors/NotFound";
+export * from "./errors/RequestValidation";
 
-    red:number;
-    blue:number;
-    green:number;
-    opacity:number,
-}
-const color:Color = {
+export * from "./middlewares/AuthAccess";
+export * from "./middlewares/CurrentUser";
+export * from "./middlewares/ErrorHandler";
+export * from "./middlewares/ValidateRequest";
 
-      red:10,
-      blue:10,
-      green:10,
-      opacity:0.3
-};
-
-
-export default color;
