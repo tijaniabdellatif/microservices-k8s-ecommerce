@@ -70,7 +70,7 @@ Index.getInitialProps = async (context) =>  {
 
     console.log('Landing page');
     if(typeof window === 'undefined' && context.req){
-        const response = await fetch('http://10.106.66.79:3000/api/users/current',{
+        const response = await fetch('http://10.108.87.199:3000/api/users/current',{
             headers:context.req.headers,
             method:'GET',
             cache:'no-store'
