@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2alpha3
+apiVersion: skaffold/v2beta12
 kind: Config
 deploy:
   kubectl:
@@ -7,8 +7,9 @@ deploy:
 build:
   local:
     push: false
+    tryImportMissing: true
   artifacts:
-  - image: abdellatiftijani/auth
+  - image: oussamaalmesskine/auth
     context: auth
     docker:
       dockerfile: Dockerfile
