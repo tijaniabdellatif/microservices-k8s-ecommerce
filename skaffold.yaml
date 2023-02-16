@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2alpha3
+apiVersion: skaffold/v2beta12
 kind: Config
 deploy:
   kubectl:
@@ -7,8 +7,9 @@ deploy:
 build:
   local:
     push: false
+    tryImportMissing: true
   artifacts:
-  - image: abdellatiftijani/auth
+  - image: mmerguoum/auth
     context: auth
     docker:
       dockerfile: Dockerfile
@@ -16,5 +17,14 @@ build:
       manual:
       - dest: .
         src: 'src/**/*.ts'
+  - image: mmerguoum/clientside
+    context: client
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      manual:
+      - dest: .
+        src: 'src/**/*.vue'
+    
 
 
