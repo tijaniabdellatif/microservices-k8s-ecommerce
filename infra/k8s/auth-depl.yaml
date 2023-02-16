@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+piVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-depl
@@ -13,14 +13,8 @@ spec:
         app: auth
     spec:
       containers:
-      - name: auth
-        image: abdellatiftijani/auth
-        env:
-        - name: jwt
-          valueFrom:
-            secretKeyRef:
-              name: jwt-secret
-              key: jwt
+        - name: auth
+          image: oussamaalmesskine/auth
 ---
 apiVersion: v1
 kind: Service
@@ -30,10 +24,7 @@ spec:
   selector:
     app: auth
   ports:
-  - name: auth
-    protocol: TCP
-    port: 3000
-    targetPort: 3000
-
-
-
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

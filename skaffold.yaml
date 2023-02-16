@@ -9,7 +9,7 @@ build:
     push: false
     tryImportMissing: true
   artifacts:
-  - image: abdellatiftijani/auth
+  - image: oussamaalmesskine/auth
     context: auth
     docker:
       dockerfile: Dockerfile
